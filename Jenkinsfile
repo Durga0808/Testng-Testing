@@ -1,27 +1,31 @@
 pipeline {
     agent any
-    
-    tools{
-       jdk 'jdk17'
-       maven 'maven3'
-    }
 
     stages {
-        stage('Git Checkout') {
+        stage ('Compile Stage') {
+
             steps {
-                git branch: 'main', url: 'https://github.com/Durga0808/Testng-Testing.git'
+                withMaven(maven : 'maven3') {
+                    sh 'mvn clean compile'
+                }
             }
         }
-        
-        stage('COMPILE'){
-            steps{
-                sh "mvn clean"
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(maven : 'maven3') {
+                    sh 'mvn test'
+                }
             }
         }
-        
-        stage('Test'){
-            steps{
-                sh "mvn test"
+
+
+        stage ('Deployment Stage') {
+            steps {
+                withMaven(maven : 'maven3') {
+                    sh 'mvn deploy'
+                }
             }
         }
     }
