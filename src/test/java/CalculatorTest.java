@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class CalculatorTest {
     @Test
-    public void testAddition() {
+    public void testAddition() throws InterruptedException {
         int result = Calculator.add(3, 5);
         Thread.sleep(15000);
         Assert.assertEquals(result, 8);
