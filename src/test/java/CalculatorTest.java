@@ -5,6 +5,7 @@ public class CalculatorTest {
     @Test
     public void testAddition() {
         int result = Calculator.add(3, 5);
+        Thread.sleep(15000);
         Assert.assertEquals(result, 8);
     }
 
